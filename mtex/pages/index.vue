@@ -3,7 +3,7 @@
     <div>
       <logo/>
       <h1 class="title">
-        mtex1
+        mtex
       </h1>
       <h2 class="subtitle">
         My breathtaking Nuxt.js project
