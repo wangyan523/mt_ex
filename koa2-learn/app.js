@@ -5,6 +5,8 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const session = require('koa-generic-session')
+const Redis = require('koa-redis')
 const pv = require('./middleware/koa-pv')
 const m1 = require('./middleware/m1')
 const m2 = require('./middleware/m2')
@@ -12,9 +14,18 @@ const m3 = require('./middleware/m3')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+// 引入mongoose和config配置文件
+const mongoose = require('mongoose')
+const dbConfig = require('./dbs/config')
 
 // error handler
 onerror(app)
+
+// redis
+app.keys = ['keys', 'keyskeys']
+app.use(session({
+  store: new Redis()
+}))
 
 // middlewares
 app.use(bodyparser({
@@ -43,6 +54,11 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+
+// mongoose
+mongoose.connect(dbConfig.dbs, {
+  useNewUrlParser: true
+})
 
 // error-handling
 app.on('error', (err, ctx) => {
