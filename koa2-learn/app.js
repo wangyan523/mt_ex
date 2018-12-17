@@ -24,6 +24,8 @@ onerror(app)
 // redis
 app.keys = ['keys', 'keyskeys']
 app.use(session({
+  key: 'mt',
+  prefix: 'mtpr',
   store: new Redis()
 }))
 
