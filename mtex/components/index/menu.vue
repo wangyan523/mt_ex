@@ -1,12 +1,19 @@
 <template>
   <div class="m-menu">
-    <dl class="nav" @mouseleave="leave">
+    <dl class="nav" 
+      @mouseleave="leave"
+    >
       <dt>全部分类</dt>
       <dd v-for="(item, idx) in menu" :key="idx" @mouseenter="enter">
         <i :class="item.type" />{{item.name}}<span class="arrow"></span>
       </dd>
     </dl>
-    <div class="detail" v-if="kind">
+    <div 
+      class="detail" 
+      v-if="kind"
+      @mouseenter="sover"
+      @mouseleave="sout"
+    >
       <template v-for="(item, idx) in curdetail.child">
         <h4 :key="idx">{{item.title}}</h4>
         <span v-for="v in item.child" :key="v">{{v}}</span>
@@ -51,10 +58,19 @@
     },
     methods: {
       leave() {
-        this.kind = ''
+        let self = this
+        self._timer = setTimeout(() => {
+          self.kind = ''
+        },150)
       },
       enter(e) {
         this.kind = e.target.querySelector('i').className
+      },
+      sover() {
+        clearTimeout(this._timer)
+      },
+      sout() {
+        this.kind = ''
       }
     }
   }
