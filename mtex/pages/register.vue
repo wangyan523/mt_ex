@@ -6,7 +6,7 @@
           href="/"
           class="site-logo" />
         <span class="login">
-          <em class="bold">已有美团账号</em>
+          <em class="bold">已有美团账号?</em>
           <a href="/login">
             <el-button
               type="primary"
