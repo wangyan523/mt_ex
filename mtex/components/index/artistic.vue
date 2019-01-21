@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     over: async function (e) {
-      
+      console.log(e)
     }
   },
 
