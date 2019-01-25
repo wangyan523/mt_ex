@@ -53,5 +53,25 @@ router.post('/signup', async (ctx) => {
     }
     return false
   }
-  
+  let nuser = await User.create({username, password, email})
+  if (nuser) {
+    let res = await axios.post('/users/singin', {username, password})
+    if (res.data && res.data.code === 0) {
+      ctx.body = {
+        code: 0,
+        msg: '注册成功',
+        user: res.data.user
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: 'error'
+      }
+    }
+  } else {
+    ctx.body = {
+      code: -1,
+      msg: '注册失败'
+    }
+  }
 })
