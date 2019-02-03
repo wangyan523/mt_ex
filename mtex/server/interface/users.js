@@ -49,7 +49,7 @@ router.post('/signup', async (ctx) => {
   if (user.length) {
     ctx.body = {
       code: -1,
-      msg: '已被注册啦'
+      msg: '已被注册了'
     }
     return false
   }
