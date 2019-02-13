@@ -128,7 +128,18 @@ export default {
     }
   },
   methods: {
-    sendMsg() {},
+    sendMsg() {
+      const self = this
+      let namePass
+      let emailPass
+      if (self.timerid) {
+        return false
+      }
+      this.$refs['ruleForm'].validateField('name', (valid) => {
+        namePass = valid
+      })
+      
+    },
     register() {},
   }
 }
